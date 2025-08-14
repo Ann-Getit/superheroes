@@ -89,7 +89,7 @@
 
     const API_URL = 'https://akabab.github.io/superhero-api/api/all.json';
 
-$(document).ready(function() {
+$(function() {
   $('#load-heroes').on('click', function() {
     $.getJSON(API_URL, function(allHeroes) {
       $('#heroes-container').empty();
