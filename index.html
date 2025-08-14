@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Superheroes Live</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Gajraj+One&family=Kumbh+Sans:wght@100..900&family=Nata+Sans:wght@100..900&family=Playwrite+IE:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Kumbh+Sans:wght@100..900&family=Nata+Sans:wght@100..900&family=Playwrite+IE:wght@300&display=swap" rel="stylesheet">
+
+  <style>
+
+
+    body {
+       text-align: center;
+      font-family: "Dancing Script", cursive;
+      font-optical-sizing: auto;
+      font-weight: 900;
+      font-size: 17px;
+      font-style: normal;
+      background-color: rgb(217, 219, 217);
+
+    }
+
+    button {
+        color: whitesmoke;
+        background-color: rgb(82, 78, 78);
+        border-radius: 20px;
+      font-family: "Dancing Script", cursive;
+      font-optical-sizing: auto;
+      font-weight: 900;
+      font-style: normal;
+      font-size: 20px;
+      height: 50px;
+    }
+    button:hover {
+        background-color: rgb(236, 47, 47);
+    }
+
+    h1 {
+      font-family: "Gajraj One", sans-serif;
+      font-weight: 300;
+      font-size: 60px;
+      font-style: normal;
+      background: linear-gradient(
+         to right,
+         rgb(55, 27, 212),
+         rgb(20, 166, 17),
+          rgb(238, 5, 5)
+     
+        );
+        background-size: 30rem 100%;   /* vaste “tile” */
+        background-repeat: repeat-x;   /* niet stretchen, herhalen */
+        background-position: left top;
+         -webkit-background-clip: text;
+         background-clip: text; 
+         -webkit-text-fill-color: transparent;
+         color: transparent;
+    }
+        .hero-card {
+      border: 2px solid rgb(55, 27, 212);
+      border-radius: 8px;
+      padding: 10px;
+      margin: 10px;
+      display: inline-block;
+      text-align: center;
+        width: 190px;
+  background: whitesmoke;
+  box-shadow:  inset 0 0 10px rgba(50, 40, 50, 50),
+  0 4px 8px rgba(50, 30, 50, 2);
+  transform: perspective(600px) rotateX(10deg);
+      
+    }
+    .hero-card img {
+      width: 150px;
+     /* height: auto;*/
+    }
+
+
+
+  </style>
+</head>
+<body>
+    <!--project met IPA, jquery------>
+  <h1>Superheroes Live</h1>
+  <button id="load-heroes">Laad 10 willekeurige helden</button>
+  <div id="heroes-container"></div>
+
+<script>
+
+    const API_URL = 'https://akabab.github.io/superhero-api/api/all.json';
+
+$(document).ready(function() {
+  $('#load-heroes').on('click', function() {
+    $.getJSON(API_URL, function(allHeroes) {
+      $('#heroes-container').empty();
+      
+      // Kies 10 willekeurige helden
+      const shuffled = allHeroes.sort(() => 0.5 - Math.random());
+      const selected = shuffled.slice(0, 10);
+      
+      console.log("Aantal geladen helden: " + selected.length);
+      
+      for (let hero of selected) {
+        console.log(hero.name);
+        const html = `
+          <div class="hero-card">
+            <img src="${hero.images.sm}" alt="${hero.name}">
+            <h3>${hero.name}</h3>
+            <p>Intelligence: ${hero.powerstats.intelligence}</p>
+          </div>`;
+        $('#heroes-container').append(html);
+      }
+    })
+    .fail(function() {
+      alert('Fout bij het laden van helden. Probeer opnieuw.');
+    });
+  });
+});
+</script>
+</body>
+</html>
