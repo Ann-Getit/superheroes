@@ -42,20 +42,26 @@
       font-size: 60px;
       font-style: normal;
       background: linear-gradient(
-         to right,
-         rgb(55, 27, 212),
-         rgb(20, 166, 17),
+         to bottom,
+         rgb(4, 109, 2) 35%,
           rgb(238, 5, 5)
-     
         );
-        background-size: 30rem 100%;   /* vaste “tile” */
-        background-repeat: repeat-x;   /* niet stretchen, herhalen */
-        background-position: left top;
-         -webkit-background-clip: text;
-         background-clip: text; 
-         -webkit-text-fill-color: transparent;
+        background-size: 100% 100%;
+        -webkit-background-clip: text; 
+        -webkit-text-fill-color: transparent;
          color: transparent;
     }
+
+    @media(max-width: 650px) {
+      h1 {
+        background-clip: rgb(4, 109, 2) 35%,
+          rgb(238, 5, 5);
+          font-size: 45px;
+
+      }
+    }
+
+
         .hero-card {
       border: 2px solid rgb(55, 27, 212);
       border-radius: 8px;
@@ -75,7 +81,9 @@
      /* height: auto;*/
     }
 
-
+    .hero-card:hover {
+      background: linear-gradient(to bottom, rgb(17, 31, 190), orange);
+    }
 
   </style>
 </head>
